@@ -22,7 +22,13 @@ function createCard(element) {
     img.setAttribute('src', 'src/card-img.jpeg');
     img.setAttribute('alt', `${element.title}`);
     subject.innerHTML = element.subject;
-    grade.innerHTML = `${element.grade} класс`;
+    const difGrade = element.grade.split(';');
+    const difGradeLast = difGrade.length - 1; 
+    if (difGrade.length > 1) {
+        grade.innerHTML = `${difGrade[0]}-${difGrade[difGradeLast]} класс`;
+    } else {
+        grade.innerHTML = `${difGrade} класс`;
+    }
     genre.innerHTML = element.genre;
     link.innerHTML = 'Подробнее';
     link.setAttribute('href', `${element.shopUrl}`);
@@ -45,20 +51,6 @@ function createCard(element) {
     coursesList.appendChild(li); 
     switchPrice(price, element);   
 }
-
-function r(items, element) {
-    subjSelect.addEventListener('change', (e) => {
-        const val = e.target.value;
-        console.log(val);
-        if (val !== 'all' || val !== '') {
-            items = items.filter(element => element.subject === val);
-        }            
-        items.forEach(element => {
-            createCard(element);
-        }); 
-    });
-}
-
 
 function switchPrice(price, element) {
     switchPriceButton.addEventListener('click', function() { 
@@ -148,15 +140,24 @@ function filterCardsGenre(items) {
 }
 
 function filterCardsGrade(items) {
+
+    const difGrade = element.grade.split(';');
+    const difGradeLast = difGrade.length - 1; 
+    if (difGrade.length > 1) {
+        grade.innerHTML = `${difGrade[0]}-${difGrade[difGradeLast]} класс`;
+    } else {
+        grade.innerHTML = `${difGrade} класс`;
+    }
+
     gradeSelect.addEventListener('change', (e) => {
         e.preventDefault();
         const val = e.target.value;
         if (val !== 'all') {
             coursesList.innerHTML = '';
             let newItems = items.filter(el => {
-                el.grade.split(';').forEach( elem => {
+                el.grade.split(';').forEach(elem => {
                     elem === val
-                })
+                });
             });
             newItems.forEach(element => {
                 createCard(element);
@@ -183,12 +184,10 @@ fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
         items.forEach(element => {
             createOptions(element);
             createCard(element);
-            console.log(element.grade);
-            console.log(element.grade.split(';'));
         }); 
         filterCardsSubj(items);
         filterCardsGenre(items);
-        filterCardsGrade(items);
+        //filterCardsGrade(items);
     })
     .catch(error => {
         console.log(`Произошла ошибка: ${error.message}`);
