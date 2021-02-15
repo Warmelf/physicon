@@ -40,12 +40,25 @@ function createCard(element) {
     cardDescription.classList.add('card-description'); 
     grade.classList.add('card-mg'); 
     genre.classList.add('card-genre'); 
-    link.classList.add('card-link');
-    link.classList.add('card-mg');
+    link.classList.add('card-link', 'card-mg');
     price.classList.add('card-price');
     coursesList.appendChild(li); 
-    switchPrice(price, element);
+    switchPrice(price, element);   
 }
+
+function r(items, element) {
+    subjSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        console.log(val);
+        if (val !== 'all' || val !== '') {
+            items = items.filter(element => element.subject === val);
+        }            
+        items.forEach(element => {
+            createCard(element);
+        }); 
+    });
+}
+
 
 function switchPrice(price, element) {
     switchPriceButton.addEventListener('click', function() { 
@@ -88,26 +101,6 @@ function removeDuplicateOptions(select) {
     });
 }
 
-fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify(info)
-}).then(response => response.json())
-    .then(data => {
-        console.log(data);
-        let items = data.items;
-        console.log(items);
-        items.forEach(element => {
-            createCard(element);
-            createOptions(element);
-        }); 
-    })
-    .catch(error => {
-        console.log(`Произошла ошибка: ${error.message}`);
-    });
-
 burgerButton.addEventListener('click', function() { 
     if (smallMenu.classList.contains('appear')) {
         smallMenu.classList.remove('appear');
@@ -116,5 +109,89 @@ burgerButton.addEventListener('click', function() {
         smallMenu.classList.add('small-menu__show');
     }
 });
+
+function filterCardsSubj(items) {
+    subjSelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val !== 'all') {
+            coursesList.innerHTML = '';
+            let newItems = items.filter(el => el.subject === val);
+            newItems.forEach(element => {
+                createCard(element);
+            }); 
+        } else {
+            coursesList.innerHTML = '';
+            items.forEach(element => {
+                createCard(element);
+            }); 
+        }        
+    });
+}
+
+function filterCardsGenre(items) {
+    genreSelect.addEventListener('change', (e) => {
+        e.preventDefault();
+        const val = e.target.value;
+        if (val !== 'all') {
+            coursesList.innerHTML = '';
+            let newItems = items.filter(el => el.genre === val);
+            newItems.forEach(element => {
+                createCard(element);
+            }); 
+        } else {
+            coursesList.innerHTML = '';
+            items.forEach(element => {
+                createCard(element);
+            }); 
+        }        
+    });
+}
+
+function filterCardsGrade(items) {
+    gradeSelect.addEventListener('change', (e) => {
+        e.preventDefault();
+        const val = e.target.value;
+        if (val !== 'all') {
+            coursesList.innerHTML = '';
+            let newItems = items.filter(el => {
+                el.grade.split(';').forEach( elem => {
+                    elem === val
+                })
+            });
+            newItems.forEach(element => {
+                createCard(element);
+            }); 
+        } else {
+            coursesList.innerHTML = '';
+            items.forEach(element => {
+                createCard(element);
+            }); 
+        }        
+    });
+}
+
+fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(info)
+}).then(response => response.json())
+    .then(data => {
+        let items = data.items;
+        console.log(items);
+        items.forEach(element => {
+            createOptions(element);
+            createCard(element);
+            console.log(element.grade);
+            console.log(element.grade.split(';'));
+        }); 
+        filterCardsSubj(items);
+        filterCardsGenre(items);
+        filterCardsGrade(items);
+    })
+    .catch(error => {
+        console.log(`Произошла ошибка: ${error.message}`);
+    });
 
 createGradeOptions();
