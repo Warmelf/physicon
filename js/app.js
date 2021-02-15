@@ -1,7 +1,10 @@
-const coursesList = document.querySelector('.courses-list');
-const switchPriceButton = document.querySelector('.switch-price');
 const burgerButton = document.querySelector('.burger');
 const smallMenu = document.querySelector('.small-menu');
+const subjSelect = document.querySelector('#subj');
+const genreSelect = document.querySelector('#genre');
+const gradeSelect = document.querySelector('#grade');
+const coursesList = document.querySelector('.courses-list');
+const switchPriceButton = document.querySelector('.switch-price');
 
 const info = {"data":""};
 
@@ -54,6 +57,37 @@ function switchPrice(price, element) {
     });
 }
 
+function createOptions(element) {
+    const optionSubject = document.createElement('option');
+    optionSubject.innerHTML = element.subject;
+    subjSelect.appendChild(optionSubject);
+    const optionGenre = document.createElement('option');
+    optionGenre.innerHTML = element.genre;
+    genreSelect.appendChild(optionGenre);
+    removeDuplicateOptions('#subj');
+    removeDuplicateOptions('#genre');
+}
+
+function createGradeOptions() {
+    for (let i = 1; i <= 11; i++) {
+        const optionGrade = document.createElement('option');
+        optionGrade.value = i;
+        optionGrade.innerText = i;
+        gradeSelect.appendChild(optionGrade); 
+    };   
+}
+
+function removeDuplicateOptions(select) {
+    const options = [];
+    document.querySelectorAll(`${select} > option`).forEach((option) => {
+        if (options.includes(option.value)) {
+            option.remove();
+        } else {
+            options.push(option.value);
+        }
+    });
+}
+
 fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
     method: 'POST',
     headers: {
@@ -67,17 +101,8 @@ fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
         console.log(items);
         items.forEach(element => {
             createCard(element);
-        });
-        // let arrOfUsedValue = ['RUB', 'USD', 'EUR', 'GBP'];
-        // keysOfObj = keysOfObj.filter(item => !arrOfUsedValue.includes(item));
-        // keysOfObj.forEach(el => {
-        //     select.forEach(elem => {
-        //         option = document.createElement('option');
-        //         option.innerHTML = el;
-        //         elem.appendChild(option);
-        //         option.setAttribute('value', el);
-        //     });                   
-        // });  
+            createOptions(element);
+        }); 
     })
     .catch(error => {
         console.log(`Произошла ошибка: ${error.message}`);
@@ -90,4 +115,6 @@ burgerButton.addEventListener('click', function() {
         smallMenu.classList.add('appear');
         smallMenu.classList.add('small-menu__show');
     }
-})
+});
+
+createGradeOptions();
