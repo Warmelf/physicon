@@ -168,7 +168,7 @@ body, button, input, select, textarea {
     margin-left: 6px;
     width: 25px;
     height: 25px;
-    background: #fff url(../src/icon-search.png) center no-repeat;
+    background: #fff url(../src/icons/icon-search.png) center no-repeat;
     border: none;
     outline: none;
     cursor: pointer;
@@ -298,4 +298,46 @@ body, button, input, select, textarea {
 
 .card-price:hover {
     background-color: #00aee6;
+}
+
+.footer__wrapper {
+    background: #3c3c3c;
+}
+
+.footer {
+    margin: 0 auto;
+    padding: 5px 20px;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__information {
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+}
+
+.footer__information a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer__information a:hover {
+    text-decoration: underline;
+}
+
+.footer__icons {
+    display: flex;
+    width: 20%;
+    padding-top: 10px;
+}
+
+.footer__icons-item {
+    display: flex;
+    margin-right: -30px;
+}
+
+.footer__icons-link {
+    width: 29px;
 }
