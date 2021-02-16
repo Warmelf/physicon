@@ -5,6 +5,8 @@ const genreSelect = document.querySelector('#genre');
 const gradeSelect = document.querySelector('#grade');
 const coursesList = document.querySelector('.courses-list');
 const switchPriceButton = document.querySelector('.switch-price');
+const searchButton = document.querySelector('.select-block__search-btn');
+const searchInput = document.querySelector('#search');
 
 const info = {"data":""};
 
@@ -102,6 +104,30 @@ burgerButton.addEventListener('click', function() {
     }
 });
 
+searchButton.addEventListener('click', function(e) { 
+    e.preventDefault();
+});
+
+function searchCard(items) {
+    searchInput.addEventListener('change', function (event) {
+        const val = event.target.value;     
+        const capitalVal = val[0].toUpperCase() + val.slice(1);
+        coursesList.innerHTML = '';
+        let newItemsSubj = items.filter(el => (el.subject === val) || (el.subject === capitalVal));
+        newItemsSubj.forEach(element => {
+            createCard(element);
+        }); 
+        let newItemsGenre = items.filter(el => (el.genre === val) || (el.genre === capitalVal));
+        newItemsGenre.forEach(element => {
+            createCard(element);
+        });     
+        let newItemsGrade = items.filter(el => el.grade === val);
+        newItemsGrade.forEach(element => {
+            createCard(element);
+        });           
+    });
+}
+
 function filterCardsSubj(items) {
     subjSelect.addEventListener('change', (e) => {
         const val = e.target.value;
@@ -140,25 +166,12 @@ function filterCardsGenre(items) {
 }
 
 function filterCardsGrade(items) {
-
-    const difGrade = element.grade.split(';');
-    const difGradeLast = difGrade.length - 1; 
-    if (difGrade.length > 1) {
-        grade.innerHTML = `${difGrade[0]}-${difGrade[difGradeLast]} класс`;
-    } else {
-        grade.innerHTML = `${difGrade} класс`;
-    }
-
     gradeSelect.addEventListener('change', (e) => {
         e.preventDefault();
         const val = e.target.value;
         if (val !== 'all') {
             coursesList.innerHTML = '';
-            let newItems = items.filter(el => {
-                el.grade.split(';').forEach(elem => {
-                    elem === val
-                });
-            });
+            let newItems = items.filter(el => el.grade === val);
             newItems.forEach(element => {
                 createCard(element);
             }); 
@@ -180,14 +193,14 @@ fetch('https://krapipl.imumk.ru:8443/api/mobilev1/update', {
 }).then(response => response.json())
     .then(data => {
         let items = data.items;
-        console.log(items);
         items.forEach(element => {
             createOptions(element);
             createCard(element);
         }); 
         filterCardsSubj(items);
         filterCardsGenre(items);
-        //filterCardsGrade(items);
+        filterCardsGrade(items);
+        searchCard(items);
     })
     .catch(error => {
         console.log(`Произошла ошибка: ${error.message}`);
