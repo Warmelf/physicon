@@ -8,113 +8,119 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <header class="header">   
-        <div class="header-logo__wrapper">             
-            <a href="/" class="header-logo">
-                <img src="src/logo.svg" alt="Облако знаний" />
-            </a>
-            <div class="burger-menu">
-                <div class="burger">
-                    <div class="burger-menu__line"></div>
-                    <div class="burger-menu__line"></div>
-                    <div class="burger-menu__line"></div>
+    <div class="wrapper">
+        <div class="content">
+            <header class="header">   
+                <div class="header-logo__wrapper">             
+                    <a href="/" class="header-logo">
+                        <img src="src/logo.svg" alt="Облако знаний" class="header-logo-img"/>
+                    </a>
+                    <div class="burger-menu__wrapper">
+                        <div class="burger-menu">
+                            <div class="burger">
+                                <div class="burger-menu__line"></div>
+                                <div class="burger-menu__line"></div>
+                                <div class="burger-menu__line"></div>
+                            </div>
+                            <ul class="small-menu">
+                                <li class="small-menu__item">
+                                    <a href="/about" class="small-menu__link">О проекте</a>
+                                </li>
+                                <li class="small-menu__item">
+                                    <a href="/news" class="small-menu__link">Новости</a>
+                                </li>
+                                <li class="small-menu__item">
+                                    <a href="/help" class="small-menu__link">Помощь</a>
+                                </li>
+                                <li class="small-menu__item">
+                                    <a href="/download" class="small-menu__link">Скачать</a>
+                                </li>
+                            </ul>
+                        </div>  
+                    </div>    
+                </div>            
+                <ul class="header-nav">  
+                    <li class="header-nav__item">
+                        <a href="#" class="header-btn">Каталог</a>
+                    </li>   
+                    <li class="header-nav__item">
+                        <a href="https://school.imumk.ru/regpin.html" class="header-btn">Активация</a>   
+                    </li>                   
+                    <li class="header-nav__item">
+                        <a href="https://school.imumk.ru" class="header-btn">Вход</a>                        
+                    </li>                    
+                </ul>               
+            </header>
+            <hr class="hr" />
+            <main class="main">
+                <h2 class="main-title">Витрина</h2>
+                <form class="select-block" id="filterform" role="form">    
+                    <div class="select-block__item">               
+                        <select id="subj" name="subj" class="select-block__select">
+                            <option value="all">Все предметы</option>
+                        </select>
+                    </div>   
+                    <div class="select-block__item">
+                        <select id="genre" name="genre" class="select-block__select">
+                            <option value="all">Все жанры</option>
+                        </select>
+                    </div>
+                    <div class="select-block__item">
+                        <select id="grade" name="grade" class="select-block__select">
+                            <option value="all">Все классы</option>
+                        </select>
+                    </div>
+                    <div class="select-block__item">                       
+                        <input class="select-block__select select-block__input" type="text" placeholder="Поиск" id="search" name="search" />
+                        <button class="select-block__search-btn" type="submit" title="Найти"></button>
+                    </div>
+                </form>
+                <div class="switch-price-block">
+                    <p class="switch-price__title">рубли/бонусы</p>
+                    <label class="checkbox">
+                        <input type="checkbox" />
+                        <span class="switch-price"></span>
+                    </label>
                 </div>
-                <ul class="small-menu">
-                    <li class="small-menu__item">
-                        <a href="/about" class="small-menu__link">О проекте</a>
-                    </li>
-                    <li class="small-menu__item">
-                        <a href="/news" class="small-menu__link">Новости</a>
-                    </li>
-                    <li class="small-menu__item">
-                        <a href="/help" class="small-menu__link">Помощь</a>
-                    </li>
-                    <li class="small-menu__item">
-                        <a href="/download" class="small-menu__link">Скачать</a>
-                    </li>
+                <ul class="courses-list">                  
                 </ul>
-            </div>      
-        </div>            
-        <ul class="header-nav">  
-            <li class="header-nav__item">
-                <a href="#" class="header-btn">Каталог</a>
-            </li>   
-            <li class="header-nav__item">
-                <a href="https://school.imumk.ru/regpin.html" class="header-btn">Активация</a>   
-            </li>                   
-            <li class="header-nav__item">
-                <a href="https://school.imumk.ru" class="header-btn">Вход</a>                        
-            </li>                    
-        </ul>               
-    </header>
-    <hr class="hr" />
-    <main class="main">
-        <h2 class="main-title">Витрина</h2>
-        <form class="select-block" id="filterform" role="form">    
-            <div class="select-block__item">               
-                <select id="subj" name="subj" class="select-block__select">
-                    <option value="all">Все предметы</option>
-                </select>
-            </div>   
-            <div class="select-block__item">
-                <select id="genre" name="genre" class="select-block__select">
-                    <option value="all">Все жанры</option>
-                </select>
-            </div>
-            <div class="select-block__item">
-                <select id="grade" name="grade" class="select-block__select">
-                    <option value="all">Все классы</option>
-                </select>
-            </div>
-            <div class="select-block__item">                       
-                <input class="select-block__select select-block__input" type="text" placeholder="Поиск" id="search" name="search" />
-                <button class="select-block__search-btn" type="submit" title="Найти"></button>
-            </div>
-        </form>
-        <div class="switch-price-block">
-            <p class="switch-price__title">рубли/бонусы</p>
-            <label class="checkbox">
-                <input type="checkbox" />
-                <span class="switch-price"></span>
-            </label>
+            </main>
         </div>
-        <ul class="courses-list">                  
-        </ul>
-    </main>
-    <footer class="footer__wrapper">
-        <div class="footer">
-            <div class="footer__information">
-                <p>&copy; <a href="http://physiconlab.ru">ООО &laquo;Физикон Лаб&raquo;</a>, 2013&mdash;2021</p>
-                <p><a rel="nofollow" href="/privacy">Пользовательское соглашение</a></p>
+        <footer class="footer__wrapper">
+            <div class="footer">
+                <div class="footer__information">
+                    <p>&copy; <a href="http://physiconlab.ru">ООО &laquo;Физикон Лаб&raquo;</a>, 2013&mdash;2021</p>
+                    <p><a rel="nofollow" href="/privacy">Пользовательское соглашение</a></p>
+                </div>
+                <ul class="footer__icons">
+                    <li class="footer__icons-item">
+                        <a href="https://twitter.com/oblako_znanij" class="footer__icons-link">
+                            <img src="src/icons/icon-twitter.svg" alt="Twitter" />
+                        </a>
+                    </li>
+                    <li class="footer__icons-item">
+                        <a href="http://vk.com/oblako_znanij" class="footer__icons-link">
+                            <img src="src/icons/icon-vk.svg" alt="Vkontakte" />
+                        </a>
+                    </li>
+                    <li class="footer__icons-item">
+                        <a href="https://www.facebook.com/oblakoznanij/?ref=oblako" class="footer__icons-link">
+                            <img src="src/icons/icon-fb.svg" alt="Facebook" />
+                        </a>
+                    </li>
+                    <li class="footer__icons-item">
+                        <a href="https://www.instagram.com/oblako_znanij/" class="footer__icons-link">
+                            <img src="src/icons/icon-inst.svg" alt="Instagram" />
+                        </a>
+                    </li>                     
+                </ul>
+                <div class="footer__information">
+                    <p><a href="tel:+74987446757">+7 (499) 322-07-57</a>, <a href="mailto:info@imumk.ru">info@imumk.ru</a></p>
+                    <p><a rel="nofollow" href="/regulations">Правила пользования сайтом</a></p>
+                </div>
             </div>
-            <ul class="footer__icons">
-                <li class="footer__icons-item">
-                    <a href="https://twitter.com/oblako_znanij" class="footer__icons-link">
-                        <img src="src/icons/icon-twitter.svg" alt="Twitter" />
-                    </a>
-                </li>
-                <li class="footer__icons-item">
-                    <a href="http://vk.com/oblako_znanij" class="footer__icons-link">
-                        <img src="src/icons/icon-vk.svg" alt="Vkontakte" />
-                    </a>
-                </li>
-                <li class="footer__icons-item">
-                    <a href="https://www.facebook.com/oblakoznanij/?ref=oblako" class="footer__icons-link">
-                        <img src="src/icons/icon-fb.svg" alt="Facebook" />
-                    </a>
-                </li>
-                <li class="footer__icons-item">
-                    <a href="https://www.instagram.com/oblako_znanij/" class="footer__icons-link">
-                        <img src="src/icons/icon-inst.svg" alt="Instagram" />
-                    </a>
-                </li>                     
-            </ul>
-            <div class="footer__information">
-                <p><a href="tel:+74987446757">+7 (499) 322-07-57</a>, <a href="mailto:info@imumk.ru">info@imumk.ru</a></p>
-                <p><a rel="nofollow" href="/regulations">Правила пользования сайтом</a></p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
     <script src="js/app.js"></script>
 </body>
 </html>
